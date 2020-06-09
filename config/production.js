@@ -1,4 +1,5 @@
 module.exports = {
   MODE: 'production',
-  DB_PATH: process.env.DB_PATH
+  PORT: process.env.PORT,
+  DB_PATH: 'db/chinook.sqlite'
 };
