@@ -65,6 +65,25 @@ const controllers = {
       res.json(rows)
     });
   },
+  artistId: (req, res) => {
+
+    const sql = `
+      SELECT ar.Name, al.Title, t.Name
+      FROM albums as al, tracks as t, artists as ar
+      WHERE al.ArtistId = ar.ArtistId 
+        AND al.AlbumId = t.AlbumId 
+        AND ar.ArtistId="${req.params.id}"
+    `;
+
+    db.all(sql, (err, rows) => {
+      if (err) {
+        res.status(400).json({ "error": err.message });
+        return;
+      }
+
+      res.json(rows)
+    });
+  },
   getOne: (req, res) => {
 
     const id = req.params.id;

@@ -9,4 +9,5 @@ router.get('/albums', controllers.getAllAlbums);
 router.get('/tracks', controllers.getAllTracks);
 router.get('/playlists', controllers.getAllPlaylists);
 
+router.get('/artists/:id', controllers.artistId);
 module.exports = router;
