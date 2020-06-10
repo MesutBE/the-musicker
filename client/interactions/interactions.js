@@ -6,6 +6,5 @@ document.querySelector('#root').addEventListener('click', async (e) => {
         const data = await doFetch.get(`/api/${text}`);
         
         UI.addChild(text, data);
-
     }
 });

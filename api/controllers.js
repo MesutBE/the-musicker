@@ -1,7 +1,19 @@
-const db = require('../db-connection');
+const db = require('./db-connection');
 
 const controllers = {
-  getAll: (req, res) => {
+  getInit: (req, res) => {
+    // SELECT name FROM sqlite_master where type='table'
+    const sql = `SELECT name FROM sqlite_master where type='table'`;
+
+    db.all(sql, (err, rows) => {
+      if (err) {
+        res.status(400).json({ "error": err.message });
+        return;
+      }
+      res.json(rows);
+    });
+  },
+  getAllArtists: (req, res) => {
 
     const sql = `SELECT * FROM artists`;
 
