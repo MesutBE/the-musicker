@@ -8,11 +8,21 @@ class UI {
         const ul = document.createElement('ul');
 
         data.forEach(element => {
-            ul.innerHTML += `
-            <li><a href="#" class="link">${element.name}</li>
+            root.innerHTML += `
+            <ul id="table-${element.name}"><a href="#" class="link">${element.name}</ul>
             `
         });
 
         root.appendChild(ul);
+    }
+
+    static addChild(text, data) {
+        const tableName = document.getElementById(`table-${text}`)
+        
+        data.forEach(element => {
+            tableName.innerHTML += `
+            <li>${element.Name}</li>
+            `
+        })
     }
 }
