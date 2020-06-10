@@ -26,6 +26,19 @@ const controllers = {
       res.json(rows)
     });
   },
+  getAllalbums: (req, res) => {
+
+    const sql = `SELECT * FROM albums`;
+
+    db.all(sql, (err, rows) => {
+      if (err) {
+        res.status(400).json({ "error": err.message });
+        return;
+      }
+
+      res.json(rows)
+    });
+  },
   getOne: (req, res) => {
 
     const id = req.params.id;
