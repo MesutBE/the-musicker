@@ -16,10 +16,8 @@ document.querySelector('#table-items').addEventListener('click', async (e) => {
         const id = e.target.parentNode.parentNode.childNodes[3].innerText; // get span value
 
         const data = await doFetch.get(`/api/${text}/${id}`);
-
-        console.log(data);
-        alert('Please see the console to check results!');
-
+        
+        UI.listSongs(text, data);
     }
 });
 document.querySelector('#table-items').addEventListener('click', async (e) => {

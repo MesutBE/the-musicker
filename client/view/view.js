@@ -29,6 +29,74 @@ class UI {
         root.appendChild(ul);
     }
 
+    static listSongs(text, data) {
+        const tableName = document.getElementById('table-items');
+        tableName.innerHTML = '';
+
+        if (text.toLowerCase() == 'artists' || text.toLowerCase() == 'tracks') {
+            // data = [ { ArtistId: 1, Name: 'AC/DC' }, { ArtistId: 2, Name: 'Accept' } ]
+
+            tableName.innerHTML = `
+            <tbody>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Artists</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-child-link">
+                    </tbody>
+                </table>
+            </tbody>
+            `
+            for (let item in data[0]) {
+                tableName.childNodes[1].childNodes[1].childNodes[1].innerHTML += `
+                            <th scope="col">${item}</th>
+                `
+            }
+            data.forEach((element, index) => {
+                tableName.childNodes[1].childNodes[1].nextElementSibling.innerHTML += `
+                        <tr>
+                            <th scope="row">${index}</th>
+                            <td>${element.Name}</td>
+                            <td>${element.Title}</td>
+                        </tr>
+            `
+                // <li class="table-child-link"><span style="display: none">${element.ArtistId}</span>${element.Name}</li>
+            })
+        } else if (text.toLowerCase() == 'playlists') {
+            // data = [ { ArtistId: 1, Name: 'AC/DC' }, { ArtistId: 2, Name: 'Accept' } ]
+
+            tableName.innerHTML = `
+            <tbody>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Artists</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-child-link">
+                    </tbody>
+                </table>
+            </tbody>
+            `
+            for (let item in data[0]) {
+                tableName.childNodes[1].childNodes[1].childNodes[1].innerHTML += `
+                            <th scope="col">${item}</th>
+                `
+            }
+            data.forEach((element, index) => {
+                tableName.childNodes[1].childNodes[1].nextElementSibling.innerHTML += `
+                        <tr>
+                            <th scope="row">${index}</th>
+                            <td>${element.Name}</td>
+                        </tr>
+            `
+                // <li class="table-child-link"><span style="display: none">${element.ArtistId}</span>${element.Name}</li>
+            })
+        }
+    }
+
     static addChild(text, data) {
         const tableName = document.getElementById('table-items');
         tableName.innerHTML = '';

@@ -115,7 +115,7 @@ console.log(rows);
     console.log(req.params.id);
 
     const sql = `
-      SELECT t.name
+      SELECT t.Name
       FROM playlists as p, playlist_track as pt, tracks as t
       WHERE  p.playlistid="${req.params.id}" and  p.playlistid=pt.playlistid and pt.trackid = t.trackid
       LIMIT 10;
