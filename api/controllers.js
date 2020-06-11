@@ -15,20 +15,21 @@ const controllers = {
   },
   getAllArtists: (req, res) => {
 
-    const sql = `SELECT * FROM artists`;
+    const sql = `SELECT ar.artistId, ar.Name FROM artists as ar`;
 
     db.all(sql, (err, rows) => {
       if (err) {
         res.status(400).json({ "error": err.message });
         return;
       }
+console.log(rows);
 
       res.json(rows)
     });
   },
   getAllAlbums: (req, res) => {
 
-    const sql = `SELECT * FROM albums`;
+    const sql = `SELECT a.ArtistId, a.title FROM albums as a`;
 
     db.all(sql, (err, rows) => {
       if (err) {
@@ -42,7 +43,8 @@ const controllers = {
   getAllTracks: (req, res) => {
 
     const sql = `
-      SELECT * FROM tracks
+      SELECT t.AlbumId, t.Name 
+      FROM tracks as t
       LIMIT 10
       `;
 
@@ -93,7 +95,7 @@ console.log(rows);
     console.log(req.params.id);
 
     const sql = `
-      SELECT t.Name "Song Name", al.title "Album"
+      SELECT t.Name, al.title
       FROM tracks as t, albums as al
       WHERE t.albumid="${req.params.id}"
         AND t.albumid = al.albumid
@@ -129,6 +131,26 @@ console.log(rows);
       res.json(rows)
     });
   },
+  deletePlaylist: (req, res) => {
+    const id = req.params.id;
+
+    const sql = `
+      DELETE FROM playlists
+      WHERE PlaylistId = "${Number(id)}"
+      `;
+    console.log(sql);
+
+    db.run(sql, function (err) {
+      if (err) {
+        res.status(400).json({ "error": err.message });
+        return;
+      }
+      // console.log(this);
+
+      res.json({ message: `Row(s) deleted: ${this.changes}` });
+    });
+
+  },
   create: (req, res) => {
     // read row data from body
     const dataStringified = JSON.stringify(req.body);
@@ -152,26 +174,6 @@ console.log(rows);
       }
       res.json({
         message: `A row has been inserted with ArtistId: ${this.lastID}`});
-    });
-
-  },
-  delete: (req, res) => {
-    const id = req.params.id;
-
-    const sql = `
-      DELETE FROM artists
-      WHERE ArtistId = "${Number(id)}"
-      `;
-    // console.log(sql);
-
-    db.run(sql, function (err) {
-      if (err) {
-        res.status(400).json({ "error": err.message });
-        return;
-      }
-      // console.log(this);
-
-      res.json({ message: `Row(s) deleted: ${this.changes}` });
     });
 
   },
