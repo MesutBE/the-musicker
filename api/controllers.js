@@ -109,19 +109,22 @@ console.log(rows);
       res.json(rows)
     });
   },
-  getOne: (req, res) => {
+  playlistsId: (req, res) => {
+    console.log(req.params.id);
 
-    const id = req.params.id;
-    console.log(id);
-
-
-    const sql = `SELECT * FROM artists  Where ArtistId="${Number(id)}"`;
+    const sql = `
+      SELECT t.name
+      FROM playlists as p, playlist_track as pt, tracks as t
+      WHERE  p.playlistid="${req.params.id}" and  p.playlistid=pt.playlistid and pt.trackid = t.trackid
+      LIMIT 10;
+    `;
 
     db.all(sql, (err, rows) => {
       if (err) {
         res.status(400).json({ "error": err.message });
         return;
       }
+      console.log(rows);
 
       res.json(rows)
     });
@@ -152,32 +155,6 @@ console.log(rows);
     });
 
   },
-  update: (req, res) => {
-    // read row data from body
-    const id = req.params.id;
-    const dataStringified = JSON.stringify(req.body);
-    const dataParsed = JSON.parse(dataStringified);
-    const sql = `
-      UPDATE artists
-      SET Name = "${dataParsed.Name}"
-      WHERE ArtistId = ${Number(id)}
-      `;
-
-    // Sample body for request
-    // {
-    //   "Name": "new artist"
-    // }
-    db.run(sql, function (err) {
-      if (err) {
-        res.status(400).json({ "error": err.message });
-        return;
-      }
-      //return the last id if the table 
-      res.json({ message: `Row(s) updated: ${this.changes}`});
-    });
-
-
-  },
   delete: (req, res) => {
     const id = req.params.id;
 
@@ -197,7 +174,33 @@ console.log(rows);
       res.json({ message: `Row(s) deleted: ${this.changes}` });
     });
 
-  }
+  },
+  // update: (req, res) => {
+  //   // read row data from body
+  //   const id = req.params.id;
+  //   const dataStringified = JSON.stringify(req.body);
+  //   const dataParsed = JSON.parse(dataStringified);
+  //   const sql = `
+  //     UPDATE artists
+  //     SET Name = "${dataParsed.Name}"
+  //     WHERE ArtistId = ${Number(id)}
+  //     `;
+
+  //   // Sample body for request
+  //   // {
+  //   //   "Name": "new artist"
+  //   // }
+  //   db.run(sql, function (err) {
+  //     if (err) {
+  //       res.status(400).json({ "error": err.message });
+  //       return;
+  //     }
+  //     //return the last id if the table 
+  //     res.json({ message: `Row(s) updated: ${this.changes}` });
+  //   });
+
+
+  // }
 }
 
 module.exports = controllers;
