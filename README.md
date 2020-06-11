@@ -38,8 +38,6 @@ What technologies used for developing the app;
 1. CSS
 1. BootStrap
 
-## Screen Capture of Project
-
 ## Setup
 
 Clone this repository and try it yourself.
