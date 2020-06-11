@@ -30,19 +30,14 @@ module.exports = {
 1. A user can see a list of all albums
 1. A user can see a list of all songs
 1. A user can see a list of all playlists
-
 1. A user can click on one artist to see all the albums by that artist, with the songs for each album listed
-
-1. A user can click on one album to see all the albums by that artist, with the songs for each album listed
-
 1. A user can click on one song to see all the albums by that artist, with the songs for each album listed
-
 1. A user can click on one playlist to see all songs in that playlist
-1. A user can add or remove songs from an existing playlist
-1. A user can create a new playlist
 1. A user can delete a playlist
+1. A user can remove songs from an existing playlist
 
-
+1. A user can add songs to an existing playlist
+1. A user can create a new playlist
 
 ## 2. Write a Frontend
 
