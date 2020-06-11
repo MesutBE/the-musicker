@@ -44,7 +44,7 @@ class UI {
         } else if (text == 'tracks') {
             data.forEach(element => {
                 tableName.innerHTML += `
-            <li class="table-child-linkx"><span style="display: none">${element.TrackId}</span>${element.Name}</li>
+            <li class="table-child-link"><span style="display: none">${element.AlbumId}</span>${element.Name}</li>
             `
             })
         } else if (text == 'playlists') {

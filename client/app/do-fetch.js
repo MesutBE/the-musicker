@@ -2,6 +2,8 @@
 const doFetch = {
     get: async (url) => {
         try {
+            console.log(url);
+            
             const res = await fetch(url);
             const data = await res.json();
 

@@ -41,7 +41,10 @@ const controllers = {
   },
   getAllTracks: (req, res) => {
 
-    const sql = `SELECT * FROM tracks`;
+    const sql = `
+      SELECT * FROM tracks
+      LIMIT 10
+      `;
 
     db.all(sql, (err, rows) => {
       if (err) {
@@ -66,13 +69,34 @@ const controllers = {
     });
   },
   artistId: (req, res) => {
+    console.log(req.params.id);
 
     const sql = `
-      SELECT ar.Name, al.Title, t.Name
+      SELECT t.Name, al.Title
       FROM albums as al, tracks as t, artists as ar
       WHERE al.ArtistId = ar.ArtistId 
         AND al.AlbumId = t.AlbumId 
         AND ar.ArtistId="${req.params.id}"
+    `;
+    
+    db.all(sql, (err, rows) => {
+      if (err) {
+        res.status(400).json({ "error": err.message });
+        return;
+      }
+console.log(rows);
+
+      res.json(rows)
+    });
+  },
+  tracksId: (req, res) => {
+    console.log(req.params.id);
+
+    const sql = `
+      SELECT t.Name "Song Name", al.title "Album"
+      FROM tracks as t, albums as al
+      WHERE t.albumid="${req.params.id}"
+        AND t.albumid = al.albumid
     `;
 
     db.all(sql, (err, rows) => {
@@ -80,6 +104,7 @@ const controllers = {
         res.status(400).json({ "error": err.message });
         return;
       }
+      console.log(rows);
 
       res.json(rows)
     });
