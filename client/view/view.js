@@ -41,7 +41,7 @@ class UI {
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Artists</th>
+                            <th scope="col">${text}</th>
                         </tr>
                     </thead>
                     <tbody class="table-child-link">
@@ -72,7 +72,7 @@ class UI {
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Artists</th>
+                            <th scope="col">Tracks</th>
                         </tr>
                     </thead>
                     <tbody class="table-child-link">
@@ -89,12 +89,14 @@ class UI {
                 tableName.childNodes[1].childNodes[1].nextElementSibling.innerHTML += `
                         <tr>
                             <th scope="row">${index}</th>
+                            <td>${element.TrackId}</td>
                             <td>${element.Name}</td>
+                            <td><a href="#" class="btn btn-danger btn-sm delete">X</a></td>
                         </tr>
             `
                 // <li class="table-child-link"><span style="display: none">${element.ArtistId}</span>${element.Name}</li>
             })
-        }
+        } 
     }
 
     static addChild(text, data) {

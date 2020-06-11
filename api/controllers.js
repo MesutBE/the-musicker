@@ -115,7 +115,7 @@ console.log(rows);
     console.log(req.params.id);
 
     const sql = `
-      SELECT t.Name
+      SELECT t.TrackId, t.Name
       FROM playlists as p, playlist_track as pt, tracks as t
       WHERE  p.playlistid="${req.params.id}" and  p.playlistid=pt.playlistid and pt.trackid = t.trackid
       LIMIT 10;
@@ -137,6 +137,26 @@ console.log(rows);
     const sql = `
       DELETE FROM playlists
       WHERE PlaylistId = "${Number(id)}"
+      `;
+    console.log(sql);
+
+    db.run(sql, function (err) {
+      if (err) {
+        res.status(400).json({ "error": err.message });
+        return;
+      }
+      // console.log(this);
+
+      res.json({ message: `Row(s) deleted: ${this.changes}` });
+    });
+
+  },
+  deleteTrack: (req, res) => {
+    const id = req.params.id;
+
+    const sql = `
+      DELETE FROM tracks
+      WHERE TrackId = "${Number(id)}"
       `;
     console.log(sql);
 
