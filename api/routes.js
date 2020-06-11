@@ -12,4 +12,6 @@ router.get('/playlists', controllers.getAllPlaylists);
 router.get('/artists/:id', controllers.artistId);
 router.get('/tracks/:id', controllers.tracksId);
 router.get('/playlists/:id', controllers.playlistsId);
+
+router.delete('/playlists/:id', controllers.deletePlaylist);
 module.exports = router;
